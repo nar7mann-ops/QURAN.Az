@@ -14,7 +14,7 @@
   <div class="intro-moon"></div>
   <div class="intro-arabic">ٱلسَّلَامُ عَلَيْكُمْ<br>وَرَحْمَةُ ٱللَّهِ وَبَرَكَاتُهُ</div>
   <div class="intro-divider"><span></span><i></i><span></span></div>
-  <div class="intro-latin">Əsseləmu Ələykum Rəhmətullahi və Bərəkətuhu</div>
+  <div class="intro-latin">PEACE & BLESSINGS UPON YOU</div>
   <button class="intro-btn" onclick="openApp()"><span>Quranı Aç ✦</span></button>
 </div>
 
@@ -22,9 +22,9 @@
   <div class="topbar">
     <div>
       <div class="topbar-title">القرآن الكريم</div>
-      <div class="topbar-info">114 Surə · Multilingual</div>
+      <div class="topbar-info" id="langIndicator">AZƏRBAYCAN DİLİNDƏ</div>
     </div>
-    <div class="topbar-badge" id="topBadge">KİTABI AÇ</div>
+    <div class="topbar-badge">Mübarək Kitab</div>
   </div>
 
   <div class="stage" id="stage">
@@ -57,16 +57,17 @@
       </div>
     </div>
     
-    <select id="langSelect" class="lang-select-css" onchange="changeLanguage(this.value)">
-      <option value="az.sultanov">Azərbaycan (Sultanov)</option>
-      <option value="quran-uthmani">Arabic (Original)</option>
-      <option value="ru.kuliev">Russian (Kuliev)</option>
-      <option value="tr.diyanet">Türkçe (Diyanet)</option>
-      <option value="en.sahih">English (Sahih Int.)</option>
-      <option value="de.aburida">Deutsch (Abu Rida)</option>
-      <option value="fr.hamidullah">Français</option>
-      <option value="zh.jian">Chinese</option>
-      <option value="ja.japanese">Japanese</option>
+    <select id="langSelect" class="lang-selector" onchange="changeLanguage(this.value)">
+      <option value="az.sultanov">AZƏRBAYCAN (Sultanov)</option>
+      <option value="quran-uthmani">ARABIC (Original)</option>
+      <option value="ru.kuliev">RUSSIAN (Kuliev)</option>
+      <option value="en.sahih">ENGLISH (Sahih Int.)</option>
+      <option value="tr.diyanet">TÜRKÇE (Diyanet)</option>
+      <option value="de.aburida">DEUTSCH</option>
+      <option value="fr.hamidullah">FRANÇAIS</option>
+      <option value="es.cortes">ESPAÑOL</option>
+      <option value="zh.jian">CHINESE</option>
+      <option value="ja.japanese">JAPANESE</option>
     </select>
   </div>
 
@@ -75,7 +76,7 @@
   </div>
 
   <div class="page-spread-wrap" id="spreadWrap">
-    <div class="book-page" id="bookPage">
+    <div id="bookPage" class="book-page">
       <div class="page-spine-shadow"></div>
       <div class="surah-banner">
         <div class="surah-banner-name" id="pageBannerName">—</div>
