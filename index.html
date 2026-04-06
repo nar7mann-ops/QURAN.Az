@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="az">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>Müqəddəs Quran — Multilingual</title>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<title>Müqəddəs Quran — القرآن الكريم</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -14,7 +14,7 @@
   <div class="intro-moon"></div>
   <div class="intro-arabic">ٱلسَّلَامُ عَلَيْكُمْ<br>وَرَحْمَةُ ٱللَّهِ وَبَرَكَاتُهُ</div>
   <div class="intro-divider"><span></span><i></i><span></span></div>
-  <div class="intro-latin">PEACE & BLESSINGS UPON YOU</div>
+  <div class="intro-latin">Əsseləmu Ələykum Rəhmətullahi və Bərəkətuhu</div>
   <button class="intro-btn" onclick="openApp()"><span>Quranı Aç ✦</span></button>
 </div>
 
@@ -22,9 +22,9 @@
   <div class="topbar">
     <div>
       <div class="topbar-title">القرآن الكريم</div>
-      <div class="topbar-info">HOLY QURAN EXPLORER</div>
+      <div class="topbar-info">114 Surə · Multilingual</div>
     </div>
-    <div class="topbar-badge" id="topBadge">Kitabı Aç</div>
+    <div class="topbar-badge" id="topBadge">KİTABI AÇ</div>
   </div>
 
   <div class="stage" id="stage">
@@ -39,13 +39,11 @@
         <svg class="c-mandala" viewBox="0 0 120 120">
           <circle cx="60" cy="60" r="50" fill="none" stroke="var(--gold)" stroke-width="0.5" opacity="0.3"/>
           <polygon points="60,10 65,45 100,36 74,60 100,84 65,75 60,110 55,75 20,84 46,60 20,36 55,45" fill="none" stroke="var(--gold)" stroke-width="0.8"/>
-          <circle cx="60" cy="60" r="12" fill="none" stroke="var(--gold)" stroke-width="0.5"/>
         </svg>
         <div class="cover-quran-text">القرآن<br>الكريم</div>
         <div class="cover-tap-hint">Oxumaq üçün toxunun</div>
       </div>
     </div>
-    <div class="stage-hint">Oxumaq üçün kitaba toxunun</div>
   </div>
 </div>
 
@@ -59,22 +57,20 @@
       </div>
     </div>
     
-    <select class="lang-select-box" id="langSelect" onchange="changeLanguage(this.value)">
-      <option value="az.sultanov">Azerbaijani (Sultanov)</option>
+    <select id="langSelect" class="lang-select-css" onchange="changeLanguage(this.value)">
+      <option value="az.sultanov">Azərbaycan (Sultanov)</option>
       <option value="quran-uthmani">Arabic (Original)</option>
       <option value="ru.kuliev">Russian (Kuliev)</option>
+      <option value="tr.diyanet">Türkçe (Diyanet)</option>
       <option value="en.sahih">English (Sahih Int.)</option>
-      <option value="tr.diyanet">Turkish (Diyanet)</option>
-      <option value="de.aburida">German (Abu Rida)</option>
-      <option value="es.cortes">Spanish (Cortés)</option>
-      <option value="fr.hamidullah">French (Hamidullah)</option>
-      <option value="zh.jian">Chinese (Ma Jian)</option>
+      <option value="de.aburida">Deutsch (Abu Rida)</option>
+      <option value="fr.hamidullah">Français</option>
+      <option value="zh.jian">Chinese</option>
       <option value="ja.japanese">Japanese</option>
     </select>
   </div>
 
   <div class="surah-panel">
-    <div class="surah-search-wrap"><input class="surah-search" id="surahSearch" placeholder="Axtar..." oninput="filterChips(this.value)" /></div>
     <div class="surah-chips-wrap" id="surahChips"></div>
   </div>
 
@@ -93,9 +89,9 @@
   </div>
 
   <div class="reader-footer">
-    <button class="nav-btn" id="footPrev" onclick="prevPage()">◂</button>
+    <button class="nav-btn" onclick="prevPage()">◂ Geri</button>
     <div class="progress-bar-wrap"><div class="progress-bar" id="progressBar"></div></div>
-    <button class="nav-btn" id="footNext" onclick="nextPage()">▸</button>
+    <button class="nav-btn" onclick="nextPage()">İrəli ▸</button>
   </div>
 </div>
 
