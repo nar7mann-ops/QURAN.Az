@@ -1,219 +1,117 @@
 <!DOCTYPE html>
 <html lang="az">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-<title>Müqəddəs Quran — Azərbaycan Dilində</title>
-<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
-<style>
-:root {
-  --gold: #c9a84c;
-  --dark: #09090f;
-  --page-bg: #f9f3e8;
-  --ink: #1a1008;
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;background:var(--dark);overflow:hidden;font-family:'Amiri',serif;touch-action:manipulation}
-
-/* ===== ANIMASIYALAR VƏ EFFEKTLƏR ===== */
-#intro{
-  position:fixed;inset:0;z-index:9999;
-  background:radial-gradient(ellipse at 50% 40%,#0d2a1c 0%,#07080f 70%);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  transition:opacity .9s ease;
-}
-#intro.hide{opacity:0;pointer-events:none}
-.stars-bg{position:absolute;inset:0;overflow:hidden}
-.s{position:absolute;border-radius:50%;background:#fff;animation:tw var(--d) ease-in-out infinite var(--dl);opacity:0}
-@keyframes tw{0%,100%{opacity:0}50%{opacity:var(--op)}}
-
-.intro-arabic{font-size:30px;color:var(--gold);text-align:center;direction:rtl;margin-bottom:10px;animation:su 1.2s ease forwards}
-.intro-latin{font-family:'Cinzel',serif;font-size:11px;color:var(--gold);letter-spacing:2px;text-align:center;animation:su 1s ease 0.5s forwards;opacity:0}
-@keyframes su{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
-
-.intro-btn{
-  margin-top:30px;padding:12px 35px;background:transparent;border:1px solid var(--gold);
-  color:var(--gold);cursor:pointer;font-family:'Cinzel',serif;letter-spacing:3px;text-transform:uppercase;
-  transition: 0.3s; position: relative; z-index: 10;
-}
-.intro-btn:hover{background:var(--gold);color:var(--dark)}
-
-/* ===== 3D KİTAB STAGE ===== */
-#app{display:none;position:fixed;inset:0;flex-direction:column;background:radial-gradient(ellipse at 50% 0%,#0d2a1c 0%,#07080f 60%)}
-#app.show{display:flex}
-.stage{flex:1;display:flex;align-items:center;justify-content:center;perspective:1200px}
-.book-3d{
-  width:220px;height:300px;background:linear-gradient(135deg, #1c4535, #071a10);
-  border-radius:5px 15px 15px 5px;position:relative;transform:rotateY(-25deg) rotateX(5deg);
-  box-shadow:0 20px 50px rgba(0,0,0,0.5);cursor:pointer;transition:0.6s cubic-bezier(.34,1.5,.64,1);
-  display:flex;align-items:center;justify-content:center;
-}
-.book-3d:hover{transform:rotateY(-10deg) scale(1.05)}
-.cover-text{color:var(--gold);font-size:30px;text-align:center;text-shadow:0 0 15px var(--gold)}
-
-/* ===== OXU PANELİ (READER) ===== */
-#reader{display:none;position:fixed;inset:0;z-index:100;background:#0a0a0f;flex-direction:column}
-#reader.show{display:flex;animation:fadeIn 0.5s}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-
-.reader-header{padding:10px 15px;border-bottom:1px solid rgba(201,168,76,0.15);display:flex;align-items:center;justify-content:space-between}
-.btn-close{color:var(--gold);font-size:24px;cursor:pointer;padding:5px}
-
-.surah-panel{background:#07080f;padding:10px;display:flex;gap:10px;overflow-x:auto;scrollbar-width:none}
-.surah-chip{padding:6px 18px;border:1px solid rgba(201,168,76,0.3);color:var(--gold);border-radius:20px;white-space:nowrap;cursor:pointer;font-size:14px}
-.surah-chip.active{background:rgba(201,168,76,0.2);border-color:var(--gold)}
-
-.page-spread-wrap{flex:1;display:flex;justify-content:center;padding:15px;overflow:hidden}
-.book-page{
-  width:100%;max-width:450px;background:var(--page-bg);border-radius:4px 12px 12px 4px;
-  padding:25px;display:flex;flex-direction:column;box-shadow:0 10px 40px rgba(0,0,0,0.6);
-  position:relative;
-}
-.ayahs-container{flex:1;overflow-y:auto;padding-right:5px}
-
-/* AYƏ VƏ TƏRCÜMƏ */
-.ayah-box{margin-bottom:30px;border-bottom:1px solid rgba(0,0,0,0.05);padding-bottom:15px}
-.ar-text{direction:rtl;text-align:right;font-size:26px;line-height:2;color:var(--ink);margin-bottom:12px}
-.az-text{direction:ltr;text-align:left;font-family:sans-serif;font-size:16px;color:#333;line-height:1.6}
-.ayah-num{color:var(--gold);font-weight:bold;margin-left:8px;font-size:18px}
-
-.reader-footer{padding:15px;display:flex;justify-content:space-between;align-items:center;background:#07080f}
-.nav-btn{padding:10px 20px;background:var(--gold);border:none;border-radius:30px;cursor:pointer;font-weight:bold;font-family:'Cinzel'}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Müqəddəs Quran — Azərbaycan Dilində</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cinzel:wght@400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div id="intro">
   <div class="stars-bg" id="stars"></div>
-  <div class="intro-arabic">ٱلسَّلَامُ عَلَيْكُمْ</div>
-  <div class="intro-latin">Müqəddəs Quran</div>
-  <button class="intro-btn" onclick="openApp()">Daxil Ol</button>
+  <div class="intro-moon"></div>
+  <div class="intro-arabic">Əssələmu Əleykum</div>
+  <div class="intro-divider"><span></span><i></i><span></span></div>
+  <div class="intro-latin">Müqəddəs Quran Azərbaycan dilində</div>
+  <button class="intro-btn" onclick="openApp()"><span>Quranı Aç ✦</span></button>
+</div>
+
+<div id="loadingScreen">
+  <div class="loading-moon"></div>
+  <div class="loading-text">Yüklənir</div>
+  <div class="loading-bar-wrap"><div class="loading-bar" id="loadingBar"></div></div>
+  <div class="loading-sub" id="loadingSub">Mətnlər hazırlanır...</div>
 </div>
 
 <div id="app">
-  <div class="stage">
-    <div class="book-3d" onclick="openReader()">
-      <div class="cover-text">القرآن<br>الكريم</div>
+  <div class="topbar">
+    <div>
+      <div class="topbar-title">QURAN-I KƏRİM</div>
+      <div class="topbar-info">114 Surə · Azərbaycan dilində tərcümə</div>
     </div>
+    <div class="topbar-badge" id="topBadge">Kitabı Aç</div>
+  </div>
+
+  <div class="stage" id="stage">
+    <div class="dust" id="dustLayer"></div>
+    <div class="book-3d" id="book3d" onclick="openReader()">
+      <div class="book-spine"><div class="spine-label">QURAN-I KƏRİM</div></div>
+      <div class="book-pages-stack"></div>
+      <div class="book-cover">
+        <div class="cover-frame"></div>
+        <div class="cflower tl">✿</div><div class="cflower tr">✿</div>
+        <div class="cflower bl">✿</div><div class="cflower br">✿</div>
+        <svg class="c-mandala" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="60" cy="60" r="56" fill="none" stroke="rgba(201,168,76,0.12)" stroke-width="0.5"/>
+          <circle cx="60" cy="60" r="46" fill="none" stroke="rgba(201,168,76,0.18)" stroke-width="0.5"/>
+          <circle cx="60" cy="60" r="36" fill="none" stroke="rgba(201,168,76,0.28)" stroke-width="0.5"/>
+          <circle cx="60" cy="60" r="22" fill="none" stroke="rgba(201,168,76,0.38)" stroke-width="0.5"/>
+          <polygon points="60,10 65,45 100,36 74,60 100,84 65,75 60,110 55,75 20,84 46,60 20,36 55,45" fill="none" stroke="rgba(201,168,76,0.55)" stroke-width="0.8"/>
+          <circle cx="60" cy="60" r="6" fill="none" stroke="rgba(201,168,76,0.8)" stroke-width="0.8"/>
+          <circle cx="60" cy="60" r="2.5" fill="rgba(201,168,76,0.9)"/>
+        </svg>
+        <div class="cover-quran-text">QURAN<br>KƏRİM</div>
+        <div class="cover-tap-hint">Oxumaq üçün toxunun</div>
+      </div>
+    </div>
+    <div class="stage-hint">Oxumaq üçün kitaba toxunun</div>
   </div>
 </div>
 
 <div id="reader">
   <div class="reader-header">
-    <div class="btn-close" onclick="closeReader()">✕</div>
-    <div style="color:var(--gold);font-family:'Cinzel'" id="rSurahName">SURƏ</div>
-    <div style="color:rgba(201,168,76,0.5);font-size:12px" id="rPageNum">Səhifə 1</div>
-  </div>
-
-  <div class="surah-panel" id="surahChips"></div>
-
-  <div class="page-spread-wrap">
-    <div class="book-page">
-      <div class="ayahs-container" id="ayahsContainer">
-        <div id="pageText">Yüklənir...</div>
+    <div class="reader-header-left">
+      <div class="btn-close" onclick="closeReader()">✕</div>
+      <div>
+        <div class="reader-surah-name" id="rSurahName">—</div>
+        <div class="reader-page-num" id="rPageNum">Səhifə 1</div>
       </div>
     </div>
+    <div style="font-family:'Amiri',serif;font-size:14px;color:rgba(201,168,76,.5)">Azərbaycan dilində</div>
+  </div>
+
+  <div class="surah-panel">
+    <div class="surah-search-wrap">
+      <input class="surah-search" id="surahSearch" placeholder="Axtar..." oninput="filterChips(this.value)" />
+    </div>
+    <div class="surah-chips-wrap" id="surahChips"></div>
+  </div>
+
+  <div class="page-spread-wrap" id="spreadWrap">
+    <div class="book-page" id="bookPage">
+      <div class="page-spine-shadow"></div>
+      <div class="surah-banner">
+        <div class="surah-banner-name" id="pageBannerName">—</div>
+        <div class="surah-banner-az" id="pageBannerAz">—</div>
+      </div>
+      <div class="page-bismillah" id="pageBismillah">Mərhəmətli və Rəhmli Allahın adı ilə!</div>
+      <div class="ayahs-container" id="ayahsContainer">
+        <div class="page-text" id="pageText">Yüklənir...</div>
+      </div>
+      <div class="page-num-bottom" id="pageNumBottom">— 1 —</div>
+    </div>
+
+    <div class="swipe-arrows">
+      <div class="arrow-btn" onclick="prevPage()">‹</div>
+      <div class="arrow-btn" onclick="nextPage()">›</div>
+    </div>
+    <div class="zoom-controls">
+      <div class="zoom-btn" onclick="zoomIn()">+</div>
+      <div class="zoom-btn" onclick="zoomOut()">−</div>
+    </div>
+    <div class="zoom-ind" id="zoomInd">100%</div>
   </div>
 
   <div class="reader-footer">
-    <button class="nav-btn" onclick="prevPage()">Geri</button>
-    <div id="progText" style="color:var(--gold);font-size:10px">0%</div>
-    <button class="nav-btn" onclick="nextPage()">İrəli</button>
+    <button class="nav-btn" id="footPrev" onclick="prevPage()">◂ Geri</button>
+    <div class="progress-bar-wrap"><div class="progress-bar" id="progressBar"></div></div>
+    <button class="nav-btn" id="footNext" onclick="nextPage()">İrəli ▸</button>
   </div>
 </div>
 
-<script>
-// Ulduzları yaratmaq
-const starsWrap = document.getElementById('stars');
-for(let i=0; i<80; i++) {
-  const s = document.createElement('div'); s.className = 's';
-  s.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;width:2px;height:2px;--d:${2+Math.random()*3}s;--dl:${Math.random()*5}s;--op:${0.5+Math.random()}`;
-  starsWrap.appendChild(s);
-}
-
-const SURAH_META = [
-  [1,"Fatihə"],[2,"Bəqərə"],[3,"Ali-İmran"],[4,"Nisa"],[5,"Maidə"],[112,"İxlas"],[113,"Fələq"],[114,"Nas"]
-];
-
-let currentSurahNum = 1;
-let currentPage = 0;
-let QURAN_CACHE = {};
-const AYAHS_PER_PAGE = 4;
-
-function openApp() {
-  document.getElementById('intro').classList.add('hide');
-  setTimeout(() => { document.getElementById('app').classList.add('show'); }, 600);
-}
-
-function openReader() {
-  document.getElementById('reader').classList.add('show');
-  buildChips();
-  loadSurah(1, 0);
-}
-
-function closeReader() { document.getElementById('reader').classList.remove('show'); }
-
-function buildChips() {
-  const wrap = document.getElementById('surahChips');
-  wrap.innerHTML = '';
-  SURAH_META.forEach(m => {
-    const chip = document.createElement('div');
-    chip.className = 'surah-chip' + (m[0]===currentSurahNum ? ' active' : '');
-    chip.innerText = m[1];
-    chip.onclick = () => loadSurah(m[0], 0);
-    wrap.appendChild(chip);
-  });
-}
-
-async function loadSurah(num, page) {
-  currentSurahNum = num;
-  currentPage = page;
-  document.getElementById('pageText').innerHTML = "<div style='color:var(--gold);text-align:center'>Yüklənir...</div>";
-  buildChips();
-  
-  try {
-    let data;
-    if (QURAN_CACHE[num]) {
-      data = QURAN_CACHE[num];
-    } else {
-      const res = await fetch(`https://api.alquran.cloud/v1/surah/${num}/editions/quran-uthmani,az.mammadaliyev`);
-      const json = await res.json();
-      data = json.data;
-      QURAN_CACHE[num] = data;
-    }
-    render(data);
-  } catch (e) {
-    document.getElementById('pageText').innerHTML = "İnternet xətası.";
-  }
-}
-
-function render(data) {
-  const arAyahs = data[0].ayahs;
-  const azAyahs = data[1].ayahs;
-  document.getElementById('rSurahName').innerText = data[0].englishName.toUpperCase();
-
-  const start = currentPage * AYAHS_PER_PAGE;
-  const sliceAr = arAyahs.slice(start, start + AYAHS_PER_PAGE);
-  const sliceAz = azAyahs.slice(start, start + AYAHS_PER_PAGE);
-
-  let html = '';
-  sliceAr.forEach((ayə, i) => {
-    html += `
-      <div class="ayah-box">
-        <div class="ar-text">${ayə.text} <span class="ayah-num">(${start + i + 1})</span></div>
-        <div class="az-text"><strong>${start + i + 1}.</strong> ${sliceAz[i].text}</div>
-      </div>
-    `;
-  });
-
-  document.getElementById('pageText').innerHTML = html || "<div style='text-align:center'>Surə bitdi.</div>";
-  document.getElementById('rPageNum').innerText = `Səhifə ${currentPage + 1}`;
-  document.getElementById('progText').innerText = Math.round(((start + sliceAr.length) / arAyahs.length) * 100) + "%";
-}
-
-function nextPage() { currentPage++; loadSurah(currentSurahNum, currentPage); }
-function prevPage() { if(currentPage > 0) { currentPage--; loadSurah(currentSurahNum, currentPage); } }
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
+
