@@ -1,209 +1,131 @@
-/* ============================================================
-   QURAN AZ — Məmmədəliyev & Bünyadov tərcüməsi (API)
-============================================================ */
-
-const SURAH_META = [
-  [1,"الفاتحة","əl-Fatihə",7,"Məkkə"],[2,"البقرة","əl-Bəqərə",286,"Mədinə"],
-  [3,"آل عمران","Ali İmran",200,"Mədinə"],[4,"النساء","ən-Nisa",176,"Mədinə"],
-  [5,"المائدة","əl-Maidə",120,"Mədinə"],[6,"الأنعام","əl-Ənam",165,"Məkkə"],
-  [7,"الأعراف","əl-Əraf",206,"Məkkə"],[8,"الأنفال","əl-Ənfal",75,"Mədinə"],
-  [9,"التوبة","ət-Tövbə",129,"Mədinə"],[10,"يونس","Yunus",109,"Məkkə"],
-  [11,"هود","Hud",123,"Məkkə"],[12,"يوسف","Yusif",111,"Məkkə"],
-  [13,"الرعد","ər-Rəd",43,"Mədinə"],[14,"إبراهيم","İbrahim",52,"Məkkə"],
-  [15,"الحجر","əl-Hicr",99,"Məkkə"],[16,"النحل","ən-Nəhl",128,"Məkkə"],
-  [17,"الإسراء","əl-İsra",111,"Məkkə"],[18,"الكهf","əl-Kəhf",110,"Məkkə"],
-  [19,"مريم","Məryəm",98,"Məkkə"],[20,"طه","Ta-Ha",135,"Məkkə"],
-  [21,"الأنبياء","əl-Ənbiya",112,"Məkkə"],[22,"الحج","əl-Həcc",78,"Mədinə"],
-  [23,"المؤمنون","əl-Muminun",118,"Məkkə"],[24,"النور","ən-Nur",64,"Mədinə"],
-  [25,"الفرقان","əl-Furqan",77,"Məkkə"],[26,"الشعراء","əş-Şuəra",227,"Məkkə"],
-  [27,"النمل","ən-Nəml",93,"Məkkə"],[28,"القصص","əl-Qəsəs",88,"Məkkə"],
-  [29,"العنكبوت","əl-Ənkəbut",69,"Məkkə"],[30,"الروم","ər-Rum",60,"Məkkə"],
-  [31,"لقمان","Loqman",34,"Məkkə"],[32,"السجدة","əs-Səcdə",30,"Məkkə"],
-  [33,"الأحزاب","əl-Əhzab",73,"Mədinə"],[34,"سبأ","Səba",54,"Məkkə"],
-  [35,"فاطر","Fatir",45,"Məkkə"],[36,"يس","Ya-Sin",83,"Məkkə"],
-  [37,"الصافات","əs-Saffat",182,"Məkkə"],[38,"ص","Sad",88,"Məkkə"],
-  [39,"الزمر","əz-Zümər",75,"Məkkə"],[40,"غافر","Ğafir",85,"Məkkə"],
-  [41,"فصلت","Fussilət",54,"Məkkə"],[42,"الشورى","əş-Şura",53,"Məkkə"],
-  [43,"الزخرف","əz-Zuxruf",89,"Məkkə"],[44,"الدخان","əd-Duxan",59,"Məkkə"],
-  [45,"الجاثية","əl-Casiyə",37,"Məkkə"],[46,"الأحقاف","əl-Əhqaf",35,"Məkkə"],
-  [47,"محمد","Muhəmməd",38,"Mədinə"],[48,"الفتح","əl-Fəth",29,"Mədinə"],
-  [49,"الحجرات","əl-Hucurat",18,"Mədinə"],[50,"ق","Qaf",45,"Məkkə"],
-  [51,"الذاريات","əz-Zariyat",60,"Məkkə"],[52,"الطور","ət-Tur",49,"Məkkə"],
-  [53,"النجم","ən-Nəcm",62,"Məkkə"],[54,"القمر","əl-Qəmər",55,"Məkkə"],
-  [55,"الرحمن","ər-Rəhman",78,"Mədinə"],[56,"الواقعة","əl-Vaqiə",96,"Məkkə"],
-  [57,"الحديد","əl-Hədid",29,"Mədinə"],[58,"المجادلة","əl-Mücadilə",22,"Mədinə"],
-  [59,"الحشر","əl-Həşr",24,"Mədinə"],[60,"الممتحنة","əl-Mumtəhinə",13,"Mədinə"],
-  [61,"الصف","əs-Səff",14,"Mədinə"],[62,"الجمعة","əl-Cumə",11,"Mədinə"],
-  [63,"المنافقون","əl-Munafiqun",11,"Mədinə"],[64,"التغابن","ət-Təğabun",18,"Mədinə"],
-  [65,"الطلاق","ət-Talaq",12,"Mədinə"],[66,"التحريم","ət-Təhrim",12,"Mədinə"],
-  [67,"الملك","əl-Mulk",30,"Məkkə"],[68,"القلم","əl-Qələm",52,"Məkkə"],
-  [69,"الحاقة","əl-Haqqə",52,"Məkkə"],[70,"المعارج","əl-Məaric",44,"Məkkə"],
-  [71,"نوح","Nuh",28,"Məkkə"],[72,"الجن","əl-Cin",28,"Məkkə"],
-  [73,"المزمل","əl-Müzzəmmil",20,"Məkkə"],[74,"المدثر","əl-Müddəssir",56,"Məkkə"],
-  [75,"القيامة","əl-Qiyamət",40,"Məkkə"],[76,"الإنسان","əl-İnsan",31,"Mədinə"],
-  [77,"المرسلات","əl-Mürsəlat",50,"Məkkə"],[78,"النبأ","ən-Nəbə",40,"Məkkə"],
-  [79,"النازعات","ən-Naziət",46,"Məkkə"],[80,"عبس","Əbəsə",42,"Məkkə"],
-  [81,"التكوير","ət-Təkvir",29,"Məkkə"],[82,"الانفطار","əl-İnfitar",19,"Məkkə"],
-  [83,"المطففين","əl-Mutaffifin",36,"Məkkə"],[84,"الانشقاق","əl-İnşiqaq",25,"Məkkə"],
-  [85,"البروج","əl-Buruc",22,"Məkkə"],[86,"الطارق","ət-Tariq",17,"Məkkə"],
-  [87,"الأعلى","əl-Əla",19,"Məkkə"],[88,"الغاشية","əl-Ğaşiyə",26,"Məkkə"],
-  [89,"الفجر","əl-Fəcr",30,"Məkkə"],[90,"البلد","əl-Bələd",20,"Məkkə"],
-  [91,"الشمس","əş-Şəms",15,"Məkkə"],[92,"الليل","əl-Leyl",21,"Məkkə"],
-  [93,"الضحى","əd-Duha",11,"Məkkə"],[94,"الشرح","əş-Şərh",8,"Məkkə"],
-  [95,"التين","ət-Tin",8,"Məkkə"],[96,"العلق","əl-Ələq",19,"Məkkə"],
-  [97,"القدر","əl-Qədr",5,"Məkkə"],[98,"البينة","əl-Beyyinə",8,"Mədinə"],
-  [99,"الزلزلة","əz-Zəlzələ",8,"Mədinə"],[100,"العاديات","əl-Adiyat",11,"Məkkə"],
-  [101,"القارعة","əl-Qariə",11,"Məkkə"],[102,"التكاثر","ət-Təkasür",8,"Məkkə"],
-  [103,"العصر","əl-Əsr",3,"Məkkə"],[104,"الهمزة","əl-Huməzə",9,"Məkkə"],
-  [105,"الفيل","əl-Fil",5,"Məkkə"],[106,"قريş","Qureyş",4,"Məkkə"],
-  [107,"الماعون","əl-Maun",7,"Məkkə"],[108,"الكوثر","əl-Kövsər",3,"Məkkə"],
-  [109,"الكافرون","əl-Kafirun",6,"Məkkə"],[110,"النصر","ən-Nəsr",3,"Mədinə"],
-  [111,"المسد","əl-Məsəd",5,"Məkkə"],[112,"الإخلاص","əl-İxlas",4,"Məkkə"],
-  [113,"الفلق","əl-Fələq",5,"Məkkə"],[114,"الناس","ən-Nas",6,"Məkkə"]
-];
-
-let QURAN_CACHE = {};
-let currentSurahNum = 1;
+let currentLang = 'az.mammadaliyev';
+let currentSurah = 1;
 let currentPage = 0;
 let zoomLevel = 1;
-const AYAHS_PER_PAGE = 4; // Mətn uzun olduğu üçün azaldıldı
-let isFlipping = false;
+const AYAHS_PER_PAGE = 6;
+let quranCache = {};
 
-// Stars initialization
-(()=>{
-  const c=document.getElementById('stars');
-  for(let i=0;i<100;i++){
-    const s=document.createElement('div');s.className='s';
-    const sz=Math.random()>.7?2.5:1.5;
-    s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;width:${sz}px;height:${sz}px;--d:${2+Math.random()*4}s;--dl:${Math.random()*5}s;--op:${.3+Math.random()*.7}`;
-    c.appendChild(s);
-  }
-})();
+const SURAH_NAMES = [
+    "Fatihə","Bəqərə","Ali-İmran","Nisa","Maidə","Ənam","Əraf","Ənfal","Tövbə","Yunus",
+    "Hud","Yusif","Rəd","İbrahim","Hicr","Nəhl","İsra","Kəhf","Məryəm","Taha",
+    "Ənbiya","Həcc","Muminun","Nur","Furqan","Şuəra","Nəml","Qəsəs","Ənkəbut","Rum",
+    "Loqman","Səcdə","Əhzab","Səba","Fatir","Yasin","Saffat","Sad","Zumər","Ğafir",
+    "Fussilət","Şura","Zuxruf","Duxan","Casiyə","Əhqaf","Muhəmməd","Fəth","Hucurat","Qaf",
+    "Zariyat","Tur","Nəcm","Qəmər","Rəhman","Vaqiə","Hədid","Mucadilə","Həşr","Mumtəhinə",
+    "Səff","Cumuə","Munafiqun","Təğabun","Talaq","Təhrim","Mulk","Qələm","Haqqə","Məaric",
+    "Nuh","Cin","Muzzəmmil","Muddəssir","Qiyamə","İnsan","Mursəlat","Nəbə","Naziət","Əbəsə",
+    "Təkvir","İnfitar","Mutaffifin","İnşiqaq","Buruc","Tariq","Əla","Ğaşiyə","Fəcr","Bələd",
+    "Şəms","Leyl","Duha","Şərh","Tin","Ələq","Qədr","Beyyinə","Zəlzələ","Adiyat",
+    "Qariə","Təkasur","Əsr","Huməzə","Fil","Qureyş","Maun","Kövsər","Kafirun","Nəsr",
+    "Məsəd","İxlas","Fələq","Nas"
+];
 
-function openApp(){
-  document.getElementById('intro').classList.add('hide');
-  setTimeout(()=>{
-    document.getElementById('intro').style.display='none';
-    document.getElementById('app').classList.add('show');
-    createDust();
-  },900);
+async function changeLanguage() {
+    currentLang = document.getElementById('langSelect').value;
+    const langNames = {
+        'az.mammadaliyev': 'AZƏRBAYCAN',
+        'tr.diyanet': 'TÜRKÇE',
+        'ru.kuliev': 'РУССКИЙ',
+        'en.sahih': 'ENGLISH',
+        'de.aburida': 'DEUTSCH'
+    };
+    document.getElementById('activeLangName').textContent = langNames[currentLang];
+    quranCache = {}; 
+    await loadSurah(currentSurah, 0);
 }
 
-function createDust(){
-  const l=document.getElementById('dustLayer');
-  for(let i=0;i<18;i++){
-    const p=document.createElement('div');p.className='dust-p';
-    p.style.cssText=`left:${10+Math.random()*80}%;bottom:${5+Math.random()*40}%;--dd:${5+Math.random()*7}s;--ddl:${Math.random()*9}s;--dx:${-30+Math.random()*60}px;--dy:${-80-Math.random()*120}px`;
-    l.appendChild(p);
-  }
+function buildSurahChips() {
+    const wrap = document.getElementById('surahChips');
+    wrap.innerHTML = '';
+    SURAH_NAMES.forEach((name, i) => {
+        const chip = document.createElement('div');
+        chip.className = 'surah-chip' + (i + 1 === currentSurah ? ' active' : '');
+        chip.textContent = `${i + 1}. ${name}`;
+        chip.onclick = () => loadSurah(i + 1, 0);
+        wrap.appendChild(chip);
+    });
 }
 
-async function fetchSurah(num){
-  if(QURAN_CACHE[num]) return QURAN_CACHE[num];
-  // az.mammadaliyev tərcüməsi istifadə olunur
-  const res = await fetch(`https://api.alquran.cloud/v1/surah/${num}/az.mammadaliyev`);
-  const data = await res.json();
-  const ayahs = data.data.ayahs.map(a => a.text);
-  QURAN_CACHE[num] = ayahs;
-  return ayahs;
-}
-
-async function openReader(){
-  document.getElementById('book3d').classList.add('open-anim');
-  setTimeout(()=>{
-    document.getElementById('reader').classList.add('show');
+async function loadSurah(num, page) {
+    currentSurah = num;
+    currentPage = page;
+    const cacheKey = `${currentLang}_${num}`;
+    
+    document.getElementById('pageText').innerHTML = 'Yüklənir...';
+    
+    if (!quranCache[cacheKey]) {
+        try {
+            const res = await fetch(`https://api.alquran.cloud/v1/surah/${num}/${currentLang}`);
+            const data = await res.json();
+            quranCache[cacheKey] = data.data;
+        } catch (e) {
+            document.getElementById('pageText').innerHTML = 'İnternet xətası!';
+            return;
+        }
+    }
+    
+    renderPage();
     buildSurahChips();
-    loadSurah(1,0);
-  },800);
 }
 
-function closeReader(){
-  document.getElementById('reader').classList.remove('show');
-  document.getElementById('book3d').classList.remove('open-anim');
+function renderPage() {
+    const data = quranCache[`${currentLang}_${currentSurah}`];
+    const ayahs = data.ayahs;
+    const start = currentPage * AYAHS_PER_PAGE;
+    const end = Math.min(start + AYAHS_PER_PAGE, ayahs.length);
+    
+    let html = '';
+    for (let i = start; i < end; i++) {
+        html += `<p style="margin-bottom:15px">${ayahs[i].text} <span class="ayah-num">${ayahs[i].numberInSurah}</span></p>`;
+    }
+    
+    document.getElementById('pageText').innerHTML = html;
+    document.getElementById('pageBannerName').textContent = data.name;
+    document.getElementById('rSurahName').textContent = SURAH_NAMES[currentSurah-1];
+    document.getElementById('rPageNum').textContent = `Səhifə ${currentPage + 1}`;
+    document.getElementById('pageNumBottom').textContent = `— ${currentPage + 1} —`;
+    document.getElementById('progressBar').style.width = (currentSurah / 114 * 100) + '%';
 }
 
-function buildSurahChips(){
-  const wrap=document.getElementById('surahChips');
-  wrap.innerHTML='';
-  SURAH_META.forEach((m,i)=>{
-    const chip=document.createElement('div');
-    chip.className='surah-chip'+(m[0]===currentSurahNum?' active':'');
-    chip.dataset.name=(m[1]+' '+m[2]).toLowerCase();
-    chip.innerHTML=`${m[0]}. ${m[2]}`;
-    chip.onclick=()=>loadSurah(m[0],0);
-    wrap.appendChild(chip);
-  });
+function nextPage() {
+    const data = quranCache[`${currentLang}_${currentSurah}`];
+    if ((currentPage + 1) * AYAHS_PER_PAGE < data.ayahs.length) {
+        currentPage++;
+        renderPage();
+    } else if (currentSurah < 114) {
+        loadSurah(currentSurah + 1, 0);
+    }
 }
 
-function filterChips(q){
-  const chips=document.querySelectorAll('.surah-chip');
-  const lo=q.toLowerCase();
-  chips.forEach(c=>{
-    c.style.display=(!lo||c.dataset.name.includes(lo))?'':'none';
-  });
+function prevPage() {
+    if (currentPage > 0) {
+        currentPage--;
+        renderPage();
+    } else if (currentSurah > 1) {
+        loadSurah(currentSurah - 1, 0);
+    }
 }
 
-async function loadSurah(num, page){
-  currentSurahNum=num;
-  currentPage=page;
-  
-  document.getElementById('pageText').textContent='Yüklənir...';
-  
-  try{
-    await fetchSurah(num);
-    renderPage();
-  } catch(e){
-    document.getElementById('pageText').textContent='Xəta: İnternet yoxdur';
-  }
-}
+function zoomIn() { zoomLevel += 0.1; applyZoom(); }
+function zoomOut() { if(zoomLevel > 0.7) zoomLevel -= 0.1; applyZoom(); }
+function applyZoom() { document.getElementById('pageText').style.fontSize = (19 * zoomLevel) + 'px'; }
 
-function renderPage(){
-  const meta=SURAH_META[currentSurahNum-1];
-  const ayahs=QURAN_CACHE[currentSurahNum]||[];
-  const start=currentPage*AYAHS_PER_PAGE;
-  const end=Math.min(start+AYAHS_PER_PAGE,ayahs.length);
+function openApp() { document.getElementById('intro').style.display = 'none'; document.getElementById('app').style.display = 'flex'; }
+function openReader() { document.getElementById('reader').classList.add('show'); loadSurah(1, 0); }
+function closeReader() { document.getElementById('reader').classList.remove('show'); }
 
-  document.getElementById('rSurahName').textContent=meta[2];
-  document.getElementById('rPageNum').textContent=`Səhifə ${currentPage+1} / ${Math.ceil(ayahs.length/AYAHS_PER_PAGE)}`;
-  document.getElementById('pageBannerName').textContent=meta[1];
-  document.getElementById('pageBannerAz').textContent=meta[2] + ` (${meta[4]})`;
-  
-  // Bismillah handling
-  document.getElementById('pageBismillah').style.display = (currentPage === 0 && currentSurahNum !== 9) ? 'block' : 'none';
-
-  let html='';
-  for(let i=start;i<end;i++){
-    html+=`<p style="margin-bottom:15px">${ayahs[i]} <span class="ayah-num">${i+1}</span></p>`;
-  }
-  document.getElementById('pageText').innerHTML=html;
-  document.getElementById('pageNumBottom').textContent=`— ${currentPage+1} —`;
-  
-  document.getElementById('progressBar').style.width = ((currentSurahNum/114)*100) + '%';
-  applyZoom();
-}
-
-function nextPage(){
-  const max = Math.ceil(QURAN_CACHE[currentSurahNum].length/AYAHS_PER_PAGE);
-  if(currentPage < max-1){
-    currentPage++;
-    renderPage();
-  } else if(currentSurahNum < 114){
-    loadSurah(currentSurahNum+1, 0);
-  }
-}
-
-function prevPage(){
-  if(currentPage > 0){
-    currentPage--;
-    renderPage();
-  } else if(currentSurahNum > 1){
-    loadSurah(currentSurahNum-1, 0);
-  }
-}
-
-function zoomIn(){ zoomLevel += 0.1; applyZoom(); }
-function zoomOut(){ zoomLevel -= 0.1; applyZoom(); }
-function applyZoom(){ 
-  document.getElementById('pageText').style.fontSize = (18 * zoomLevel) + 'px';
-  document.getElementById('zoomInd').textContent = Math.round(zoomLevel*100) + '%';
-}
+// Ulduzlar üçün sadə effekt
+(function(){
+    const stars = document.getElementById('stars');
+    for(let i=0; i<50; i++) {
+        const s = document.createElement('div');
+        s.style.position = 'absolute';
+        s.style.width = '2px';
+        s.style.height = '2px';
+        s.style.background = '#fff';
+        s.style.left = Math.random() * 100 + '%';
+        s.style.top = Math.random() * 100 + '%';
+        s.style.opacity = Math.random();
+        stars.appendChild(s);
+    }
+})();
