@@ -22,7 +22,7 @@
   <div class="topbar">
     <div>
       <div class="topbar-title">QURAN-I KƏRİM</div>
-      <div class="topbar-info" id="topInfo">Tərcümə seçilməyib</div>
+      <div class="topbar-info" id="topInfo">Tərcüməni seçin</div>
     </div>
     <div class="lang-selector">
         <select id="langSelect" onchange="changeLanguage()">
@@ -59,26 +59,30 @@
     <div class="reader-header-left">
       <div class="btn-close" onclick="closeReader()">✕</div>
       <div>
-        <div class="reader-surah-name" id="rSurahName">—</div>
+        <div class="reader-surah-name" id="rSurahName">Fatihə</div>
         <div class="reader-page-num" id="rPageNum">Səhifə 1</div>
       </div>
     </div>
-    <div id="activeLangName" style="color:var(--gold); font-size: 12px; opacity: 0.7;">Azərbaycan</div>
+    <div id="activeLangName" style="color:var(--gold); font-size: 11px; opacity: 0.8; font-family: 'Cinzel';">AZƏRBAYCAN</div>
   </div>
 
   <div class="surah-panel">
     <div class="surah-chips-wrap" id="surahChips"></div>
   </div>
 
-  <div class="page-spread-wrap">
+  <div class="page-spread-wrap" id="spreadWrap">
     <div class="book-page">
       <div class="surah-banner">
-        <div class="surah-banner-name" id="pageBannerName">—</div>
+          <div id="pageBannerName" style="font-family:'Amiri'; font-size: 24px; color: var(--gold);">الفاتحة</div>
       </div>
-      <div class="ayahs-container" id="ayahsContainer">
+      <div class="ayahs-container">
         <div class="page-text" id="pageText">Yüklənir...</div>
       </div>
       <div class="page-num-bottom" id="pageNumBottom">— 1 —</div>
+    </div>
+    <div class="zoom-controls">
+        <div class="zoom-btn" onclick="zoomIn()">+</div>
+        <div class="zoom-btn" onclick="zoomOut()">−</div>
     </div>
   </div>
 
