@@ -215,3 +215,4 @@ html,body{height:100%;background:var(--dark);overflow:hidden;font-family:'Playfa
 #loadingScreen.show{display:flex}
 .loading-moon{width:60px;height:60px;border-radius:50%;box-shadow:inset -12px -2px 0 0 var(--gold);animation:mf 1.5s infinite}
 .loading-text{font-family:'Cinzel',serif;color:var(--gold);letter-spacing:4px}
+
