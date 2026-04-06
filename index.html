@@ -12,9 +12,9 @@
 <div id="intro">
   <div class="stars-bg" id="stars"></div>
   <div class="intro-moon"></div>
-  <div class="intro-arabic">ٱلسَّلَامُ عَلَيْكُمْ</div>
+  <div class="intro-arabic">ٱلسَّلَامُ عَلَيْكُمْ<br>وَرَحْمَةُ ٱللَّهِ وَبَرَكَاتُهُ</div>
   <div class="intro-divider"><span></span><i></i><span></span></div>
-  <div class="intro-latin">Peace be upon you</div>
+  <div class="intro-latin">Əsseləmu Ələykum Rəhmətullahi və Bərəkətuhu</div>
   <button class="intro-btn" onclick="openApp()"><span>Quranı Aç ✦</span></button>
 </div>
 
@@ -22,56 +22,70 @@
   <div class="topbar">
     <div>
       <div class="topbar-title">القرآن الكريم</div>
-      <div class="topbar-info" id="langDisplay">AZƏRBAYCAN DİLİNDƏ</div>
+      <div class="topbar-info">114 Surə · Çoxdilli Tərcümə</div>
     </div>
-    <div class="topbar-badge">Kitabı Aç</div>
+    <select class="lang-selector-top" id="langSelect" onchange="changeLanguage(this.value)">
+      <option value="az.sultanov">AZƏRBAYCAN (Sultanov)</option>
+      <option value="quran-uthmani">ARABIC (Orijinal)</option>
+      <option value="ru.kuliev">RUSSIAN (Kuliev)</option>
+      <option value="en.sahih">ENGLISH (Sahih Int.)</option>
+      <option value="tr.diyanet">TÜRKÇE (Diyanet)</option>
+      <option value="de.aburida">DEUTSCH (Abu Rida)</option>
+      <option value="es.cortes">ESPAÑOL (Cortés)</option>
+      <option value="fr.hamidullah">FRANÇAIS (Hamidullah)</option>
+      <option value="zh.jian">CHINESE (Jian)</option>
+      <option value="ja.japanese">JAPANESE (Ryōichi)</option>
+    </select>
   </div>
+
   <div class="stage" id="stage">
     <div class="dust" id="dustLayer"></div>
     <div class="book-3d" id="book3d" onclick="openReader()">
-      <div class="book-spine"><div class="spine-label">Holy Quran</div></div>
+      <div class="book-spine"><div class="spine-label">القرآن الكريم</div></div>
+      <div class="book-pages-stack"></div>
       <div class="book-cover">
         <div class="cover-frame"></div>
+        <div class="cflower tl">✿</div><div class="cflower tr">✿</div>
+        <div class="cflower bl">✿</div><div class="cflower br">✿</div>
         <svg class="c-mandala" viewBox="0 0 120 120">
           <polygon points="60,10 65,45 100,36 74,60 100,84 65,75 60,110 55,75 20,84 46,60 20,36 55,45" fill="none" stroke="var(--gold)" stroke-width="0.8"/>
+          <circle cx="60" cy="60" r="6" fill="none" stroke="var(--gold)" stroke-width="0.8"/>
         </svg>
-        <div class="cover-quran-text">القرآن</div>
-        <div class="cover-tap-hint">Toxunun</div>
+        <div class="cover-quran-text">القرآن<br>الكريم</div>
+        <div class="cover-tap-hint">Oxumaq üçün toxunun</div>
       </div>
     </div>
+    <div class="stage-hint">Oxumaq üçün kitaba toxunun</div>
   </div>
 </div>
 
 <div id="reader">
   <div class="reader-header">
     <div class="btn-close" onclick="closeReader()">✕</div>
-    <select class="lang-selector" id="langSelect" onchange="changeLanguage(this.value)">
-      <option value="az.sultanov">AZƏRBAYCAN</option>
-      <option value="quran-uthmani">ARABIC (Original)</option>
-      <option value="tr.diyanet">TÜRKÇE</option>
-      <option value="en.sahih">ENGLISH</option>
-      <option value="ru.kuliev">RUSSIAN</option>
-      <option value="de.aburida">DEUTSCH</option>
-      <option value="fr.hamidullah">FRANÇAIS</option>
-      <option value="es.cortes">ESPAÑOL</option>
-      <option value="ja.japanese">JAPANESE</option>
-      <option value="zh.jian">CHINESE</option>
-    </select>
-    <div id="rSurahName" style="color:var(--gold); font-family:'Cinzel',serif; font-size:10px;">SURAH</div>
+    <div id="rSurahName" style="color:var(--gold); font-family:'Amiri'; font-size:18px;">—</div>
+    <div id="rPageNum" style="color:rgba(201,168,76,.4); font-size:10px;">Səhifə 1</div>
   </div>
+
   <div class="surah-panel">
     <div class="surah-chips-wrap" id="surahChips"></div>
   </div>
+
   <div class="page-spread-wrap" id="spreadWrap">
     <div class="book-page" id="bookPage">
-      <div class="surah-banner" id="pageBanner">Fatihə</div>
-      <div class="ayahs-container">
+      <div class="page-spine-shadow"></div>
+      <div class="surah-banner">
+        <div class="surah-banner-name" id="pageBannerName">—</div>
+        <div class="surah-banner-az" id="pageBannerAz">—</div>
+      </div>
+      <div class="ayahs-container" id="ayahsContainer">
         <div class="page-text" id="pageText">Yüklənir...</div>
       </div>
     </div>
   </div>
+
   <div class="reader-footer">
     <button class="nav-btn" onclick="prevPage()">◂ Geri</button>
+    <div class="progress-bar-wrap"><div class="progress-bar" id="progressBar"></div></div>
     <button class="nav-btn" onclick="nextPage()">İrəli ▸</button>
   </div>
 </div>
