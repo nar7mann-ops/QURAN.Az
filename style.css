@@ -1,12 +1,12 @@
 :root {
   --gold: #c9a84c; --gold2: #f0d080; --gold3: #8a6820;
   --dark: #09090f; --green: #0d3b28; --page-bg: #f9f3e8;
-  --ink: #1a1008; --ink2: #2d1f08;
+  --ink: #1a1008;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%;background:var(--dark);overflow:hidden;font-family:'Amiri',serif;touch-action:manipulation}
 
-/* SƏNİN ORİJİNAL İNTRO KODLARIN */
+/* SƏNİN ORİJİNAL İNTRO VƏ ULDUZLARIN */
 #intro{position:fixed;inset:0;z-index:9999;background:radial-gradient(ellipse at 50% 40%,#0d2a1c 0%,#07080f 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .9s ease;}
 #intro.hide{opacity:0;pointer-events:none}
 .stars-bg{position:absolute;inset:0;overflow:hidden}
@@ -15,34 +15,27 @@ html,body{height:100%;background:var(--dark);overflow:hidden;font-family:'Amiri'
 .intro-moon{width:80px;height:80px;border-radius:50%;box-shadow:inset -16px -3px 0 0 var(--gold);filter:drop-shadow(0 0 30px rgba(201,168,76,.8));animation:mf 4s ease-in-out infinite,mr 1s ease forwards;opacity:0;margin-bottom:28px;}
 @keyframes mr{from{opacity:0;transform:scale(.2) rotate(-90deg)}to{opacity:1;transform:scale(1) rotate(0)}}
 @keyframes mf{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-.intro-arabic{font-size:clamp(22px,6vw,30px);color:var(--gold);text-shadow:0 0 40px rgba(201,168,76,.9);text-align:center;line-height:1.7;opacity:0;animation:su 1.2s ease 1s forwards;direction:rtl;}
-.intro-btn{margin-top:24px;padding:13px 36px;background:transparent;border:1px solid var(--gold);color:var(--gold);font-family:'Cinzel',serif;font-size:11px;letter-spacing:4px;text-transform:uppercase;cursor:pointer;position:relative;overflow:hidden;opacity:0;animation:su 1s ease 2.8s forwards;transition:color .3s;}
-.intro-btn:hover{color:var(--dark)}
-.intro-btn::before{content:'';position:absolute;inset:0;background:var(--gold);transform:translateX(-101%);transition:transform .35s ease;z-index:-1}
-.intro-btn:hover::before{transform:translateX(0)}
-@keyframes su{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:none}}
 
-/* SƏNİN ORİJİNAL 3D KİTAB VƏ TOZ KODLARIN */
+/* SƏNİN 3D KİTAB EFFEKTİN */
 .stage{flex:1;display:flex;align-items:center;justify-content:center;perspective:1400px;position:relative;overflow:hidden;}
-.dust-p{position:absolute;width:2px;height:2px;background:var(--gold);border-radius:50%;opacity:0;animation:dustFloat var(--dd) ease-in infinite var(--ddl)}
-@keyframes dustFloat{0%{opacity:0;transform:translate(0,0) scale(0)}20%{opacity:.7}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(.3)}}
 .book-3d{position:relative;width:240px;height:340px;transform-style:preserve-3d;transform:rotateY(-25deg) rotateX(6deg);animation:bookIdle 6s ease-in-out infinite;cursor:pointer;transition:transform .7s cubic-bezier(.34,1.56,.64,1);}
 @keyframes bookIdle{0%,100%{transform:rotateY(-25deg) rotateX(6deg) translateY(0)}50%{transform:rotateY(-22deg) rotateX(4deg) translateY(-12px)}}
+.book-3d.open-anim{transform:rotateY(0deg) rotateX(0deg) scale(1.1); animation:none;}
 .book-cover{position:absolute;inset:0;background:linear-gradient(145deg,#1c4535,#071a10);border-radius:5px 14px 14px 5px;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:inset 0 0 40px rgba(0,0,0,.5), 15px 15px 40px rgba(0,0,0,.6);}
-.c-mandala{width:120px;height:120px;opacity:.8;filter:drop-shadow(0 0 10px rgba(201,168,76,.4))}
 
-/* OXUCU ÜÇÜN ƏLAVƏ DİZAYN (DİL SEÇİMİ ÜÇÜN) */
+/* OXUCU PANALİ */
 #reader{display:none;position:fixed;inset:0;z-index:100;background:#0a0a0f;flex-direction:column}
-.lang-select-css{background:rgba(201,168,76,0.1); border:1px solid var(--gold); color:var(--gold); padding:5px; border-radius:5px; font-size:10px; outline:none;}
-.book-page{width:min(94vw,390px); background:var(--page-bg); margin:auto; border-radius:4px 14px 14px 4px; box-shadow:0 8px 40px rgba(0,0,0,.7); display:flex; flex-direction:column; overflow:hidden;}
-.page-text{font-size:21px; line-height:2.2; color:var(--ink); text-align:justify; padding:20px;}
+.lang-selector{background:rgba(201,168,76,0.1); border:1px solid var(--gold); color:var(--gold); padding:5px; border-radius:5px; font-size:10px; outline:none; font-family:'Cinzel';}
+.book-page{width:min(94vw,400px); background:var(--page-bg); margin:auto; border-radius:10px; min-height:75vh; display:flex; flex-direction:column; position:relative; overflow:hidden;}
+.page-text{padding:25px; font-size:22px; line-height:2.2; color:var(--ink); text-align:justify;}
 .rtl{direction:rtl; font-family:'Amiri', serif;}
 .ltr{direction:ltr; font-family:sans-serif; font-size:18px;}
-.reader-header{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid rgba(201,168,76,.12);}
-.surah-chips-wrap{display:flex;gap:5px;overflow-x:auto;padding:10px;scrollbar-width:none;}
-.surah-chip{flex-shrink:0;padding:5px 12px;border:1px solid rgba(201,168,76,0.2);color:var(--gold);border-radius:20px;cursor:pointer;}
-.surah-chip.active{background:var(--gold);color:var(--dark);}
-.reader-footer{display:flex;align-items:center;justify-content:center;padding:15px;gap:15px;}
-.progress-bar-wrap{flex:1;height:3px;background:rgba(201,168,76,0.1);max-width:150px;}
-.progress-bar{height:100%;background:var(--gold);width:0%;}
-.nav-btn{padding:8px 20px; background:var(--gold); border:none; border-radius:20px; cursor:pointer; font-weight:bold;}
+.surah-banner{background:var(--green); color:var(--gold); padding:15px; text-align:center;}
+.reader-header{display:flex; align-items:center; justify-content:space-between; padding:15px; border-bottom:1px solid rgba(201,168,76,0.1);}
+.surah-chips-wrap{display:flex; gap:8px; overflow-x:auto; padding:10px; scrollbar-width:none;}
+.surah-chip{flex-shrink:0; padding:6px 15px; border:1px solid rgba(201,168,76,0.3); color:var(--gold); border-radius:20px; cursor:pointer;}
+.surah-chip.active{background:var(--gold); color:var(--dark);}
+.reader-footer{padding:15px; display:flex; align-items:center; justify-content:center; gap:20px;}
+.progress-bar-wrap{flex:1; height:3px; background:rgba(201,168,76,0.1); max-width:150px;}
+.progress-bar{height:100%; background:var(--gold); width:0%;}
+.nav-btn{padding:8px 25px; background:var(--gold); border:none; border-radius:20px; font-weight:bold; cursor:pointer;}
