@@ -14,7 +14,7 @@
   <div class="intro-moon"></div>
   <div class="intro-arabic">ٱلسَّلَامُ عَلَيْكُمْ<br>وَرَحْمَةُ ٱللَّهِ وَبَرَكَاتُهُ</div>
   <div class="intro-divider"><span></span><i></i><span></span></div>
-  <div class="intro-latin">Əsseləmu Ələykum Rəhmətullahi və Bərəkətuhu</div>
+  <div class="intro-latin">PEACE & BLESSINGS UPON YOU</div>
   <button class="intro-btn" onclick="openApp()"><span>Quranı Aç ✦</span></button>
 </div>
 
@@ -22,20 +22,9 @@
   <div class="topbar">
     <div>
       <div class="topbar-title">القرآن الكريم</div>
-      <div class="topbar-info">114 Surə · Çoxdilli Tərcümə</div>
+      <div class="topbar-info">HOLY QURAN EXPLORER</div>
     </div>
-    <select class="lang-selector-top" id="langSelect" onchange="changeLanguage(this.value)">
-      <option value="az.sultanov">AZƏRBAYCAN (Sultanov)</option>
-      <option value="quran-uthmani">ARABIC (Orijinal)</option>
-      <option value="ru.kuliev">RUSSIAN (Kuliev)</option>
-      <option value="en.sahih">ENGLISH (Sahih Int.)</option>
-      <option value="tr.diyanet">TÜRKÇE (Diyanet)</option>
-      <option value="de.aburida">DEUTSCH (Abu Rida)</option>
-      <option value="es.cortes">ESPAÑOL (Cortés)</option>
-      <option value="fr.hamidullah">FRANÇAIS (Hamidullah)</option>
-      <option value="zh.jian">CHINESE (Jian)</option>
-      <option value="ja.japanese">JAPANESE (Ryōichi)</option>
-    </select>
+    <div class="topbar-badge" id="topBadge">Kitabı Aç</div>
   </div>
 
   <div class="stage" id="stage">
@@ -48,8 +37,9 @@
         <div class="cflower tl">✿</div><div class="cflower tr">✿</div>
         <div class="cflower bl">✿</div><div class="cflower br">✿</div>
         <svg class="c-mandala" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="50" fill="none" stroke="var(--gold)" stroke-width="0.5" opacity="0.3"/>
           <polygon points="60,10 65,45 100,36 74,60 100,84 65,75 60,110 55,75 20,84 46,60 20,36 55,45" fill="none" stroke="var(--gold)" stroke-width="0.8"/>
-          <circle cx="60" cy="60" r="6" fill="none" stroke="var(--gold)" stroke-width="0.8"/>
+          <circle cx="60" cy="60" r="12" fill="none" stroke="var(--gold)" stroke-width="0.5"/>
         </svg>
         <div class="cover-quran-text">القرآن<br>الكريم</div>
         <div class="cover-tap-hint">Oxumaq üçün toxunun</div>
@@ -61,12 +51,30 @@
 
 <div id="reader">
   <div class="reader-header">
-    <div class="btn-close" onclick="closeReader()">✕</div>
-    <div id="rSurahName" style="color:var(--gold); font-family:'Amiri'; font-size:18px;">—</div>
-    <div id="rPageNum" style="color:rgba(201,168,76,.4); font-size:10px;">Səhifə 1</div>
+    <div class="reader-header-left">
+      <div class="btn-close" onclick="closeReader()">✕</div>
+      <div>
+        <div class="reader-surah-name" id="rSurahName">—</div>
+        <div class="reader-page-num" id="rPageNum">Səhifə 1</div>
+      </div>
+    </div>
+    
+    <select class="lang-select-box" id="langSelect" onchange="changeLanguage(this.value)">
+      <option value="az.sultanov">Azerbaijani (Sultanov)</option>
+      <option value="quran-uthmani">Arabic (Original)</option>
+      <option value="ru.kuliev">Russian (Kuliev)</option>
+      <option value="en.sahih">English (Sahih Int.)</option>
+      <option value="tr.diyanet">Turkish (Diyanet)</option>
+      <option value="de.aburida">German (Abu Rida)</option>
+      <option value="es.cortes">Spanish (Cortés)</option>
+      <option value="fr.hamidullah">French (Hamidullah)</option>
+      <option value="zh.jian">Chinese (Ma Jian)</option>
+      <option value="ja.japanese">Japanese</option>
+    </select>
   </div>
 
   <div class="surah-panel">
+    <div class="surah-search-wrap"><input class="surah-search" id="surahSearch" placeholder="Axtar..." oninput="filterChips(this.value)" /></div>
     <div class="surah-chips-wrap" id="surahChips"></div>
   </div>
 
@@ -80,13 +88,14 @@
       <div class="ayahs-container" id="ayahsContainer">
         <div class="page-text" id="pageText">Yüklənir...</div>
       </div>
+      <div class="page-num-bottom" id="pageNumBottom">— 1 —</div>
     </div>
   </div>
 
   <div class="reader-footer">
-    <button class="nav-btn" onclick="prevPage()">◂ Geri</button>
+    <button class="nav-btn" id="footPrev" onclick="prevPage()">◂</button>
     <div class="progress-bar-wrap"><div class="progress-bar" id="progressBar"></div></div>
-    <button class="nav-btn" onclick="nextPage()">İrəli ▸</button>
+    <button class="nav-btn" id="footNext" onclick="nextPage()">▸</button>
   </div>
 </div>
 
